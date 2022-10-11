@@ -1,0 +1,27 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  zmicro package install lapce <args...>"
+  echo ""
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  which mount.lapce >>/dev/null 2>&1
+  if [ "$?" != "0" ]; then
+    pm install -y lapce
+  fi
+
+  log::success "install lapce (lapce) success."
+}
+
+run() {
+  core $@
+}
+
+run $@
